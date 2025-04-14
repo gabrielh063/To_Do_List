@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Lista de Tarefas</h1>
+    <form id="task-form">
+      <input type="text" id="title" placeholder="Título" required />
+      <input type="text" id="desc" placeholder="Descrição" />
+      <button type="submit">Adicionar</button>
+    </form>
+    <div id="task-list"></div>
+  </div>
+
+  <!-- Modal de Edição -->
+  <div id="editTaskModal" style="display: none;">
+    <div class="modal-content">
+      <h2>Editar Tarefa</h2>
+      <form id="editTaskForm">
+        <label for="editTitle">Título:</label>
+        <input type="text" id="editTitle" name="editTitle">
+        
+        <label for="editDesc">Descrição:</label>
+        <textarea id="editDesc" name="editDesc"></textarea>
+        
+        <label for="editStatus">Status:</label>
+        <input type="checkbox" id="editStatus" name="editStatus">
+
+        <div class="modal-buttons">
+          <button type="submit">Salvar</button>
+          <button type="button" onclick="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
