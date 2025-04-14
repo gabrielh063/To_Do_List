@@ -11,10 +11,10 @@ def list_tasks():
 def new_task():
     return add_task()
 
-@task_bp.route('/tasks/<id>/', methods="PUT")
+@task_bp.route('/tasks/<int:id>/', methods="PUT")
 def task_update(id):
     return update_task(id)
 
-@task_bp.route('/tasks/<id>/', methods='DELETE')
+@task_bp.route('/tasks/<int:id>/', methods='DELETE')
 def remove_task(id):
     return delete_task(id)
