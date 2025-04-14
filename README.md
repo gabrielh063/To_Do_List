@@ -8,6 +8,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List), construída co
 
 A aplicação está organizada da seguinte forma:
 
+```plaintext
 To_Do_List/
 │
 ├── backend/
