@@ -82,18 +82,15 @@ function openEditModal(taskId) {
   fetch(`/tasks/${taskId}`)
     .then(response => response.json())
     .then(data => {
-      // Preenche o formulário com os dados da tarefa
       document.getElementById('editTitle').value = data.TASK_TITLE;
       document.getElementById('editDesc').value = data.TASK_DESC;
       document.getElementById('editStatus').checked = data.TASK_IS_DONE;
 
-      // Configura o comportamento do botão de "Salvar"
       document.getElementById('editTaskForm').onsubmit = function(event) {
         event.preventDefault();
         updateTask(taskId);
       };
 
-      // Exibe o modal ao clicar em "Editar"
       document.getElementById('editTaskModal').style.display = 'flex';
     })
     .catch(error => console.log('Erro ao carregar dados da tarefa:', error));
@@ -103,9 +100,7 @@ function closeModal() {
   document.getElementById('editTaskModal').style.display = 'none';
 }
 
-// Detecta clique fora do modal para fechá-lo
 document.getElementById('editTaskModal').addEventListener('click', function(event) {
-  // Fecha apenas se clicar na sobreposição (fundo preto), e não na área de conteúdo
   if (event.target === document.getElementById('editTaskModal')) {
     closeModal();
   }
