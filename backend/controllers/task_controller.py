@@ -3,7 +3,6 @@ from database.db import Database as db
 from models.task_model import Task
 from logger import Logger
 
-# Obtém a instância do Logger
 logger = Logger.get_instance()
 
 def get_tasks():
