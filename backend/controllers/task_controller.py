@@ -1,8 +1,9 @@
-from backend.database.db import Database as db
-from backend.models.task_model import Task
+from flask import jsonify, request
+from database.db import Database as db
+from models.task_model import Task
 
 def get_tasks():
-     try:
+    try:
         query = "SELECT * FROM tasks"
         results = db.execute(query)
         

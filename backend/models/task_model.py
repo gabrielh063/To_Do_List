@@ -1,18 +1,18 @@
 class Task:
-    def __init__(self, id, title, desc, is_done=False):
-        self.id = id
-        self.title = title
-        self.desc = desc
-        self.is_done = is_done
+    def __init__(self, ID_TASK, TASK_TITLE, TASK_DESC, TASK_IS_DONE=False):
+        self.ID_TASK = ID_TASK
+        self.TASK_TITLE = TASK_TITLE
+        self.TASK_DESC = TASK_DESC
+        self.TASK_IS_DONE = TASK_IS_DONE
 
     def to_dict(self):
         return {
-            "id": self.id,
-            "title": self.title,
-            "desc": self.desc,
-            "is_done": self.is_done,
+            "ID_TASK": self.ID_TASK,
+            "TASK_TITLE": self.TASK_TITLE,
+            "TASK_DESC": self.TASK_DESC,
+            "TASK_IS_DONE": self.TASK_IS_DONE
         }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data['id'], data['title'], data['desc'], data['is_done'])
+        return cls(data['ID_TASK'], data['TASK_TITLE'], data['TASK_DESC'], data['TASK_IS_DONE'])
