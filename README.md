@@ -21,7 +21,7 @@ To_Do_List/
 │   ├── style.css           # Estilos da aplicação
 │   └── app.js              # Código JavaScript que gerencia a interação da UI
 └── README.md               # Este arquivo de documentação
-
+```
 
 
 ### Backend
@@ -46,13 +46,25 @@ A aplicação oferece as seguintes funcionalidades:
 - **Editar Tarefa**: Permite ao usuário modificar as informações de uma tarefa existente.
 - **Excluir Tarefa**: Permite ao usuário remover uma tarefa da lista.
 
-## Arquitetura e Padrões
+## Justificativa para a Escolha do Padrão de Projeto MVC
+### A aplicação foi estruturada seguindo o padrão de projeto MVC (Model-View-Controller) devido à sua capacidade de separar responsabilidades de forma clara, o que traz maior organização, escalabilidade e manutenção ao código.
 
-A arquitetura do projeto segue o padrão MVC (Model-View-Controller), onde:
+### Vantagens Aplicadas ao Projeto:
+- Separação de Responsabilidades:
 
-- **Model**: A interação com o banco de dados é feita através de modelos definidos no back-end.
-- **View**: O front-end exibe os dados ao usuário e recebe as interações.
-- **Controller**: O Flask gerencia a lógica do servidor, tratando as rotas e interações com o banco de dados.
+- **Model:** Isola a lógica de acesso ao banco de dados (models.py), facilitando alterações no esquema de dados sem impactar outras partes da aplicação.
+
+- **View:** O front-end (HTML/CSS/JS) é responsável apenas pela interface com o usuário, tornando a apresentação desacoplada da lógica.
+
+- **Controller:** As rotas definidas com Flask (routes.py) funcionam como controladores, processando requisições, tratando dados e retornando respostas.
+
+- **Manutenção Facilitada:** Modificações em uma camada não afetam diretamente as outras. Por exemplo, mudar a interface visual não exige mudanças na lógica de negócios ou banco de dados.
+
+- **Escalabilidade:** A estrutura modular permite que novas funcionalidades sejam adicionadas com impacto mínimo no código existente.
+
+- **Reutilização de Código:** O modelo pode ser reutilizado em diferentes contextos (ex: uma API mobile ou um novo front-end), mantendo a lógica central intacta.
+
+Esse padrão se encaixa perfeitamente na proposta da aplicação To-Do List, tornando o projeto mais limpo, organizado e pronto para crescer de forma sustentável.
 
 ### Padrões Implementados
 
