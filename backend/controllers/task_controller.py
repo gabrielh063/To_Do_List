@@ -9,7 +9,7 @@ def get_tasks():
     try:
         query = "SELECT * FROM TASKS"
         results = db.execute(query)
-        
+                                                                                    
         # Cria uma lista de objetos Task
         TASKS = [Task(**task) for task in results]
         
