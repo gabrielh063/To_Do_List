@@ -1,39 +1,77 @@
-import unittest
-import backend.controllers.task_controller as task
+import pytest
+from flask import Flask, request
+from backend.controllers import task_controller as tc
 
+@pytest.fixture
+def task_data():
+    return {
+        "TASK_TITLE": "Test Task",
+        "TASK_DESC": "Test Description",
+        "TASK_IS_DONE": False
+    }
 
-class Testtask(unittest.TestCase):
-    def test_add_task(self):
-        # Assuming add_task(title, description) returns a dict with task info
-        result = task.add_task("Test Task", "Test Description")
-        self.assertIn("id", result)
-        self.assertEqual(result["title"], "Test Task")
-        self.assertEqual(result["description"], "Test Description")
+def test_add_task(monkeypatch, task_data):
+    def mock_execute(query, params=None):
+        return []
 
-    def test_get_task(self):
-        # Assuming get_task(id) returns a dict with task info
-        new_task = task.add_task("Another Task", "Another Description")
-        task_id = new_task["id"]
-        result = task.get_task(task_id)
-        self.assertEqual(result["id"], task_id)
-        self.assertEqual(result["title"], "Another Task")
+    monkeypatch.setattr(tc.db, "execute", mock_execute)
+    monkeypatch.setattr(tc.request, "get_json", lambda: task_data)
 
-    def test_update_task(self):
-        # Assuming update_task(id, title, description) updates and returns the task
-        new_task = task.add_task("Update Task", "Old Description")
-        task_id = new_task["id"]
-        updated = task.update_task(task_id, "Updated Task", "New Description")
-        self.assertEqual(updated["title"], "Updated Task")
-        self.assertEqual(updated["description"], "New Description")
+    response, status = tc.add_task()
+    assert status == 201
+    assert response.json["message"] == "Tarefa adicionada com sucesso"
 
-    def test_delete_task(self):
-        # Assuming delete_task(id) returns True if deleted
-        new_task = task.add_task("Delete Task", "To be deleted")
-        task_id = new_task["id"]
-        result = task.delete_task(task_id)
-        self.assertTrue(result)
-        # Optionally, check that get_task now fails or returns None
-        self.assertIsNone(task.get_task(task_id))
+def test_get_tasks(monkeypatch):
+    mock_result = [
+        {
+            "ID_TASK": 1,
+            "TASK_TITLE": "Test",
+            "TASK_DESC": "Desc",
+            "TASK_IS_DONE": False
+        }
+    ]
+    monkeypatch.setattr(tc.db, "execute", lambda query, params=None: mock_result)
 
-if __name__ == "__main__":
-    unittest.main()
+    response, status = tc.get_tasks()
+    assert status == 200
+    assert isinstance(response.json, list)
+    assert response.json[0]["TASK_TITLE"] == "Test"
+
+def test_get_task_by_id_found(monkeypatch):
+    mock_task = [{
+        "ID_TASK": 1,
+        "TASK_TITLE": "T1",
+        "TASK_DESC": "D1",
+        "TASK_IS_DONE": False
+    }]
+    monkeypatch.setattr(tc.db, "execute", lambda query, params=None: mock_task)
+
+    response, status = tc.get_task_by_id(1)
+    assert status == 200
+    assert response.json["ID_TASK"] == 1
+
+def test_get_task_by_id_not_found(monkeypatch):
+    monkeypatch.setattr(tc.db, "execute", lambda query, params=None: [])
+
+    response, status = tc.get_task_by_id(999)
+    assert status == 404
+    assert response.json["error"] == "Tarefa não encontrada"
+
+def test_update_task(monkeypatch):
+    monkeypatch.setattr(tc.db, "execute", lambda query, params=None: [])
+
+    monkeypatch.setattr(tc.request, "get_json", lambda: {
+        "TASK_TITLE": "Updated Title",
+        "TASK_DESC": "Updated Desc"
+    })
+
+    response, status = tc.update_task(1)
+    assert status == 200
+    assert response.json["message"] == "Tarefa atualizada com sucesso"
+
+def test_delete_task(monkeypatch):
+    monkeypatch.setattr(tc.db, "execute", lambda query, params=None: [])
+
+    response, status = tc.delete_task(1)
+    assert status == 200
+    assert response.json["message"] == "Tarefa removida com sucesso"
