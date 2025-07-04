@@ -1,0 +1,43 @@
+[2025-07-03 22:31:48,558] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:31:48,558] [ERROR] Falha ao obter tarefas: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+[2025-07-03 22:31:48,656] [ERROR] Falha ao obter tarefas: DB error
+[2025-07-03 22:31:49,037] [INFO] Tarefa 1 removida com sucesso.
+[2025-07-03 22:31:49,037] [ERROR] Falha ao remover tarefa: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+[2025-07-03 22:31:49,048] [ERROR] Falha ao remover tarefa: DB delete error
+[2025-07-03 22:31:49,070] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:31:49,074] [INFO] Tarefa 'Nova Tarefa' adicionada com sucesso.
+[2025-07-03 22:31:49,076] [INFO] Tarefa 1 removida com sucesso.
+[2025-07-03 22:33:21,956] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:33:21,956] [ERROR] Falha ao obter tarefas: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+[2025-07-03 22:33:22,036] [ERROR] Falha ao obter tarefas: DB error
+[2025-07-03 22:33:22,407] [INFO] Tarefa 1 removida com sucesso.
+[2025-07-03 22:33:22,407] [ERROR] Falha ao remover tarefa: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+[2025-07-03 22:33:22,420] [ERROR] Falha ao remover tarefa: DB delete error
+[2025-07-03 22:33:22,437] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:33:22,441] [INFO] Tarefa 'Nova Tarefa' adicionada com sucesso.
+[2025-07-03 22:33:22,444] [INFO] Tarefa 1 removida com sucesso.
+[2025-07-03 22:35:48,792] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:35:48,794] [ERROR] Falha ao obter tarefas: DB error
+[2025-07-03 22:35:48,799] [INFO] Tarefa 'Nova Tarefa' adicionada com sucesso.
+[2025-07-03 22:35:48,801] [ERROR] Falha ao adicionar tarefa: DB insert error
+[2025-07-03 22:35:48,804] [INFO] Tarefa 1 removida com sucesso.
+[2025-07-03 22:35:48,805] [ERROR] Falha ao remover tarefa: DB delete error
+[2025-07-03 22:35:48,808] [INFO] Tarefas obtidas com sucesso.
+[2025-07-03 22:35:48,811] [INFO] Tarefa 'Nova Tarefa' adicionada com sucesso.
+[2025-07-03 22:35:48,814] [INFO] Tarefa 1 removida com sucesso.
