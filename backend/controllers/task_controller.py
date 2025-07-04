@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from database.db import Database as db
+from database.db import Database
 from models.task_model import Task
 from logger import Logger
 
@@ -8,8 +8,8 @@ logger = Logger.get_instance()
 def get_tasks():
     try:
         query = "SELECT * FROM TASKS"
-        results = db.execute(query)
-        
+        results = Database.execute(query)
+                                                                                    
         # Cria uma lista de objetos Task
         TASKS = [Task(**task) for task in results]
         
@@ -26,7 +26,7 @@ def get_task_by_id(task_id):
     try:
         query = "SELECT * FROM TASKS WHERE ID_TASK = %s"
         params = (task_id,)
-        result = db.execute(query, params)
+        result = Database.execute(query, params)
 
         if result and len(result) > 0:
             task = Task(**result[0])
@@ -42,7 +42,7 @@ def add_task():
         data = request.get_json()
         query = "INSERT INTO TASKS (TASK_TITLE, TASK_DESC, TASK_IS_DONE) VALUES (%s, %s, %s)"
         params = (data['TASK_TITLE'], data['TASK_DESC'], data['TASK_IS_DONE'])
-        db.execute(query, params)
+        Database.execute(query, params)
         
         logger.info(f"Tarefa '{data['TASK_TITLE']}' adicionada com sucesso.")
         return jsonify({"message": "Tarefa adicionada com sucesso"}), 201
@@ -76,7 +76,7 @@ def update_task(TASK_ID):
         params = tuple(data[key] for key in data.keys()) + (TASK_ID,)
         
         # Executa a query
-        db.execute(query, params)
+        Database.execute(query, params)
         
         return jsonify({"message": "Tarefa atualizada com sucesso"}), 200
     except Exception as e:
@@ -87,7 +87,7 @@ def delete_task(ID_TASK):
     try:
         query = "DELETE FROM TASKS WHERE ID_TASK = %s"
         params = (ID_TASK,)
-        db.execute(query, params)
+        Database.execute(query, params)
         
         logger.info(f"Tarefa {ID_TASK} removida com sucesso.")
         return jsonify({"message": "Tarefa removida com sucesso"}), 200
